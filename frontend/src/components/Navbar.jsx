@@ -19,7 +19,7 @@ const Navbar = () => {
           setWishlistCount(data.count);
         } catch (error) {
           console.error("Error fetching wishlist count", error);
-        }git
+        }
       } else {
         setWishlistCount(0);
       }
