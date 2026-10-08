@@ -5,8 +5,8 @@ dotenv.config();
 
 // Create Razorpay instance
 const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_placeholder', // User should put their key here
-  key_secret: process.env.RAZORPAY_KEY_SECRET || 'secret_placeholder'
+  key_id: process.env.RAZORPAY_KEY_ID, 
+  key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
 export default razorpay;

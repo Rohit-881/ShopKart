@@ -80,7 +80,7 @@ export const createPaymentOrder = async (req, res) => {
       razorpayOrderId: razorpayOrder.id,
       amount: amountInPaise,
       currency: 'INR',
-      key: process.env.RAZORPAY_KEY_ID || 'rzp_test_placeholder' 
+      key: process.env.RAZORPAY_KEY_ID 
     });
 
   } catch (error) {
@@ -109,7 +109,7 @@ export const verifyPayment = async (req, res) => {
     // Verify signature
     const body = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSignature = crypto
-      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET || 'secret_placeholder')
+      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
       .update(body.toString())
       .digest('hex');
 
