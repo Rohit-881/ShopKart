@@ -115,14 +115,29 @@ const Checkout = () => {
         },
         theme: {
           color: "#f06e38"
+        },
+        modal: {
+          ondismiss: async function() {
+            // User closed the modal without completing payment
+            try {
+              await api.patch(`/orders/${data.shopKartOrderId}/fail`);
+            } catch (e) {
+              console.error(e);
+            }
+          }
         }
       };
 
       const paymentObject = new window.Razorpay(options);
       
-      paymentObject.on("payment.failed", function (response) {
+      paymentObject.on("payment.failed", async function (response) {
         console.error("Payment failed", response.error);
         setError(`Payment failed: ${response.error.description}`);
+        try {
+          await api.patch(`/orders/${data.shopKartOrderId}/fail`);
+        } catch (e) {
+          console.error(e);
+        }
       });
 
       paymentObject.open();

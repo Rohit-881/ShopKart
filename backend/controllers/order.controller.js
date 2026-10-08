@@ -140,6 +140,26 @@ export const verifyPayment = async (req, res) => {
   }
 };
 
+// @desc    Mark payment as failed
+// @route   PATCH /orders/:id/fail
+// @access  Private
+export const failPayment = async (req, res) => {
+  try {
+    const order = await Order.findOne({ _id: req.params.id, user: req.user._id });
+    if (!order) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+    
+    order.paymentStatus = 'FAILED';
+    await order.save();
+    
+    res.status(200).json({ success: true, message: 'Order marked as failed' });
+  } catch (error) {
+    console.error('Fail Payment Error:', error);
+    res.status(500).json({ success: false, message: 'Server Error' });
+  }
+};
+
 // @desc    Get logged in user orders
 // @route   GET /orders
 // @access  Private

@@ -4,7 +4,8 @@ import {
   createPaymentOrder,
   verifyPayment,
   getMyOrders,
-  getOrderById
+  getOrderById,
+  failPayment
 } from '../controllers/order.controller.js';
 
 const router = express.Router();
@@ -20,5 +21,7 @@ router.route('/')
 
 router.route('/:id')
   .get(getOrderById);
+
+router.patch('/:id/fail', failPayment);
 
 export default router;

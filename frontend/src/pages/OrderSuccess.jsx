@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Clock, XCircle } from 'lucide-react';
 import api from '../axiosCalls/axios';
 
 const OrderSuccess = () => {
@@ -40,14 +40,29 @@ const OrderSuccess = () => {
     );
   }
 
+  const isPaid = order.paymentStatus === 'PAID';
+  const isFailed = order.paymentStatus === 'FAILED';
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-16 text-center">
       <div className="flex justify-center mb-6">
-        <CheckCircle className="w-24 h-24 text-green-500" />
+        {isPaid ? (
+          <CheckCircle className="w-24 h-24 text-green-500" />
+        ) : isFailed ? (
+          <XCircle className="w-24 h-24 text-red-500" />
+        ) : (
+          <Clock className="w-24 h-24 text-orange-500" />
+        )}
       </div>
       
-      <h1 className="text-4xl font-extrabold text-gray-900 mb-4">Order Placed Successfully!</h1>
-      <p className="text-lg text-gray-600 mb-8">Thank you for shopping with ShopKart. Your order has been saved successfully.</p>
+      <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
+        {isPaid ? 'Order Placed Successfully!' : isFailed ? 'Payment Failed' : 'Payment Pending'}
+      </h1>
+      <p className="text-lg text-gray-600 mb-8">
+        {isPaid 
+          ? 'Thank you for shopping with ShopKart. Your order has been saved successfully.' 
+          : 'Your order was saved, but the payment has not been completed.'}
+      </p>
       
       <div className="bg-gray-50 rounded-xl p-8 border border-gray-200 text-left mb-8 space-y-4">
         <div className="flex justify-between border-b pb-4">
@@ -60,11 +75,15 @@ const OrderSuccess = () => {
         </div>
         <div className="flex justify-between border-b pb-4">
           <span className="text-gray-600">Payment Status</span>
-          <span className="font-medium text-green-600">{order.paymentStatus}</span>
+          <span className={`font-medium ${isPaid ? 'text-green-600' : isFailed ? 'text-red-600' : 'text-orange-600'}`}>
+            {order.paymentStatus}
+          </span>
         </div>
         <div className="flex justify-between">
           <span className="text-gray-600">Order Status</span>
-          <span className="font-medium text-blue-600">{order.status}</span>
+          <span className={`font-medium ${isPaid ? 'text-blue-600' : 'text-gray-500'}`}>
+            {order.status}
+          </span>
         </div>
       </div>
 
