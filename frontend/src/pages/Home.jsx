@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Truck, ShieldCheck, HeadphonesIcon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -17,9 +18,12 @@ const Home = () => {
             <p className="text-lg lg:text-xl text-gray-500 mb-10">
               Shop the latest trends & exclusive offers
             </p>
-            <button className="bg-[#f06e38] hover:bg-[#d95d2c] text-white px-10 py-3.5 rounded-xl font-medium text-lg transition-colors shadow-sm cursor-pointer">
+            <Link
+              to="/products"
+              className="bg-[#f06e38] hover:bg-[#d95d2c] text-white px-10 py-3.5 rounded-xl font-medium text-lg transition-colors shadow-sm cursor-pointer inline-flex items-center justify-center"
+            >
               Shop Now
-            </button>
+            </Link>
           </div>
 
           {/* Image Content with padding */}
@@ -62,7 +66,7 @@ const Home = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 1 */}
-          <div className="group cursor-pointer">
+          <Link to="/products" className="group cursor-pointer block">
             <div className="relative overflow-hidden bg-gray-100 aspect-square rounded-sm mb-4">
               <img
                 src="/spring.jpg"
@@ -70,11 +74,11 @@ const Home = () => {
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <h3 className="text-center text-lg font-medium text-gray-900">Spring Fashion</h3>
-          </div>
+            <h3 className="text-center text-lg font-medium text-gray-900 group-hover:text-[#f06e38] transition-colors">Spring Fashion</h3>
+          </Link>
 
           {/* Card 2 */}
-          <div className="group cursor-pointer">
+          <Link to="/products" className="group cursor-pointer block">
             <div className="relative overflow-hidden bg-gray-100 aspect-square rounded-sm mb-4">
               <img
                 src="/watches.jpg"
@@ -82,11 +86,11 @@ const Home = () => {
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <h3 className="text-center text-lg font-medium text-gray-900">Luxury Watches</h3>
-          </div>
+            <h3 className="text-center text-lg font-medium text-gray-900 group-hover:text-[#f06e38] transition-colors">Luxury Watches</h3>
+          </Link>
 
           {/* Card 3 */}
-          <div className="group cursor-pointer">
+          <Link to="/products" className="group cursor-pointer block">
             <div className="relative overflow-hidden bg-gray-100 aspect-square rounded-sm mb-4">
               <img
                 src="/home.jpg"
@@ -94,8 +98,8 @@ const Home = () => {
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <h3 className="text-center text-lg font-medium text-gray-900">Home Essentials</h3>
-          </div>
+            <h3 className="text-center text-lg font-medium text-gray-900 group-hover:text-[#f06e38] transition-colors">Home Essentials</h3>
+          </Link>
         </div>
       </section>
 

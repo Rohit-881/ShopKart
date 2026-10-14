@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../axiosCalls/axios';
 import { ArrowLeft, ShoppingCart } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -112,6 +114,7 @@ const ProductDetails = () => {
             <div className="mt-auto">
               <button 
                 disabled={product.stock === 0}
+                onClick={() => addToCart(product._id)}
                 className={`w-full py-4 rounded-xl flex items-center justify-center text-lg font-medium transition-all ${
                   product.stock > 0 
                   ? 'bg-gray-900 hover:bg-gray-800 text-white cursor-pointer shadow-md hover:shadow-lg' 

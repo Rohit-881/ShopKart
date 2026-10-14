@@ -124,6 +124,7 @@ const Checkout = () => {
             } catch (e) {
               console.error(e);
             }
+            navigate(`/order-success/${data.shopKartOrderId}`);
           }
         }
       };
@@ -132,12 +133,12 @@ const Checkout = () => {
       
       paymentObject.on("payment.failed", async function (response) {
         console.error("Payment failed", response.error);
-        setError(`Payment failed: ${response.error.description}`);
         try {
           await api.patch(`/orders/${data.shopKartOrderId}/fail`);
         } catch (e) {
           console.error(e);
         }
+        navigate(`/order-success/${data.shopKartOrderId}`);
       });
 
       paymentObject.open();
