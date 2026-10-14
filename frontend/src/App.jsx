@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
@@ -21,10 +22,11 @@ function App() {
   if (loading) return null; // Or a nice spinner
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-between">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" replace />} />
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" replace />} />
         
         <Route path="/login" element={
           <PublicRoute>
@@ -86,6 +88,8 @@ function App() {
           </ProtectedRoute>
         } />
       </Routes>
+      </main>
+      <Footer />
     </div>
   );
 }
